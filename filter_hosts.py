@@ -118,7 +118,7 @@ def filter_hosts(hosts_url, whitelist, blacklist, session):
 
 if __name__ == "__main__":
     # 配置URL（新增第二个黑名单）
-    WHITELIST_URL = "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/share/active.list-aa"
+    WHITELIST_URL = "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/pro.plus-onlydomains.txt"
     BLACKLIST_URL1 = "https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/refs/heads/main/release/china-list.txt"
     BLACKLIST_URL2 = "https://raw.githubusercontent.com/ykvhjnn/Rules/refs/heads/main/config/add_rules/useless_ad_domain.txt"  # 新增黑名单
     HOSTS_URL = "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/hosts/pro.plus.txt"

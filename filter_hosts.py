@@ -225,7 +225,7 @@ def filter_hosts_file(hosts_url, white_trie, black_trie, session):
 def main():
     # 配置目标URL
     WHITELIST_URL = "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/share/active.list-aa"
-    BLACKLIST_URL1 = "https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/refs/heads/main/release/china-list.txt"
+    BLACKLIST_URL1 = "https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/refs/heads/release/china-list.txt"
     BLACKLIST_URL2 = "https://raw.githubusercontent.com/ykvhjnn/Rules/refs/heads/main/config/add_rules/useless_ad_domain.txt"
     HOSTS_URL = "https://raw.githubusercontent.com/ykvhjnn/ad-filters-subscriber/refs/heads/release/hosts.txt"
     

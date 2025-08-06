@@ -1,0 +1,42 @@
+name: 筛选 Hosts 条目
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 每天 UTC 0 点运行
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  filter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 拉取代码仓库
+        uses: actions/checkout@v4  # 确保脚本在仓库中，若脚本不在仓库可移除这一步
+
+      - name: 设置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 安装依赖
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests  # 显式升级 pip 避免依赖问题
+
+      - name: 运行筛选脚本（带输出日志）
+        run: python main.py  # 脚本必须与工作流在同一仓库路径下
+
+      - name: 检查结果文件是否生成
+        run: |
+          if [ -f "filtered_hosts.txt" ]; then
+            echo "结果文件已生成，大小：$(du -h filtered_hosts.txt)"
+          else
+            echo "ERROR: 未生成结果文件 filtered_hosts.txt"
+            exit 1  # 若文件不存在，明确报错
+          fi
+
+      - name: 上传结果
+        uses: actions/upload-artifact@v4
+        with:
+          name: filtered-hosts
+          path: filtered_hosts.txt
+          retention-days: 7

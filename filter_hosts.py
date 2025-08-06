@@ -125,7 +125,7 @@ if __name__ == "__main__":
     # 配置URL
     WHITELIST_URL = "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/share/active.list-aa"
     BLACKLIST_URL = "https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/refs/heads/release/china-list.txt"
-    HOSTS_URL = "https://raw.githubusercontent.com/ykvhjnn/ad-filters-subscriber/refs/heads/release/hosts.txt"
+    HOSTS_URL = "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/hosts/pro.plus.txt"
     
     # 创建带重试的会话
     session = create_session_with_retries()

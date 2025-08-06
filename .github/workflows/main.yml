@@ -2,17 +2,19 @@ name: 筛选并提交 Hosts 结果
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # 每天 UTC 0 点运行
-  workflow_dispatch:  # 允许手动触发
+    - cron: '0 0 * * *'
+  workflow_dispatch:
 
 jobs:
   filter-and-commit:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # 关键：授予写入仓库内容的权限
     steps:
       - name: 拉取代码仓库
         uses: actions/checkout@v4
         with:
-          persist-credentials: true  # 保留凭据，用于后续推送
+          persist-credentials: true
 
       - name: 设置 Python
         uses: actions/setup-python@v5
@@ -25,7 +27,7 @@ jobs:
           pip install requests
 
       - name: 运行筛选脚本
-        run: python filter_hosts.py  # 生成 filtered_hosts.txt
+        run: python filter_hosts.py
 
       - name: 检查文件是否生成
         run: |
@@ -41,8 +43,7 @@ jobs:
 
       - name: 提交文件到仓库
         run: |
-          # 检查是否有变更
           git add filtered_hosts.txt
           git diff --quiet --staged || (git commit -m "自动更新筛选后的 hosts 列表 $(date +'%Y-%m-%d')" && git push origin HEAD:main)
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 使用内置令牌授权推送
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
